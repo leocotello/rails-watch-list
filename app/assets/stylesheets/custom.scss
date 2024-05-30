@@ -1,0 +1,22 @@
+body {
+  padding-top: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.list-item {
+  margin-bottom: 10px;
+}
+
+.bookmark-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  img {
+    margin-right: 10px;
+  }
+}
