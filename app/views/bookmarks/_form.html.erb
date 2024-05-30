@@ -1,0 +1,6 @@
+<!-- app/views/bookmarks/_form.html.erb -->
+<%= simple_form_for [list, bookmark] do |f| %>
+  <%= f.input :movie_id, collection: Movie.all, as: :select, label_method: :title, value_method: :id %>
+  <%= f.input :comment %>
+  <%= f.button :submit %>
+<% end %>
