@@ -3,3 +3,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "bootstrap"
 import "@popperjs/core"
+// app/assets/javascripts/application.js
+//= require rails-ujs
+//= require turbolinks
+//= require activestorage
+//= require_tree .

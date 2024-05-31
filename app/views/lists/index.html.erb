@@ -1,9 +1,16 @@
-<h1>All Lists</h1>
-<%= link_to 'New List', new_list_path %>
-<ul>
+<h1>My Lists</h1>
+<%= link_to 'New List', new_list_path, class: 'btn btn-primary' %>
+
+<div class="row">
   <% @lists.each do |list| %>
-    <li>
-      <%= link_to list.name, list_path(list) %>
-    </li>
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <%= image_tag(list.image_url.present? ? list.image_url : 'default_image.jpeg', class: 'card-img-top', alt: list.name) %>
+        <div class="card-body">
+          <h5 class="card-title"><%= list.name %></h5>
+          <%= link_to 'View List', list_path(list), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>

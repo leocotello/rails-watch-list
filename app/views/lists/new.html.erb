@@ -1,6 +1,7 @@
-<!-- app/views/lists/new.html.erb -->
 <h1>New List</h1>
+
 <%= simple_form_for @list do |f| %>
-  <%= f.input :name %>
-  <%= f.button :submit %>
+  <%= f.input :name, required: true %>
+  <%= f.input :image_url, required: false %>
+  <%= f.button :submit, "Create List", class: "btn btn-primary" %>
 <% end %>

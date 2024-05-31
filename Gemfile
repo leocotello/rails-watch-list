@@ -73,4 +73,13 @@ gem "bootstrap", "~> 5.2"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form"
-gem "sassc-rails" # Uncomment this line
+gem "sassc-rails"
+
+# Gemfile
+gem 'open-uri'
+gem 'json'
+
+# Gemfile
+gem 'rails-ujs'
+
+gem "dotenv-rails"

@@ -1,11 +1,46 @@
 <h1><%= @list.name %></h1>
-<ul>
-  <% @bookmarks.each do |bookmark| %>
-    <li class="bookmark-item">
-      <%= image_tag bookmark.movie.poster_url if bookmark.movie.poster_url.present? %>
-      <strong><%= bookmark.movie.title %></strong>: <%= bookmark.comment %>
-      <%= link_to 'Delete', bookmark_path(bookmark), method: :delete, data: { confirm: 'Are you sure?' } %>
-    </li>
+<div class="card mb-4">
+  <% if @list.image_url.present? %>
+    <%= image_tag @list.image_url, class: 'card-img-top', alt: @list.name %>
+  <% else %>
+    <%= image_tag 'default_image.jpeg', class: 'card-img-top', alt: @list.name %>
   <% end %>
-</ul>
-<%= render 'bookmarks/form', list: @list, bookmark: @bookmark %>
+  <div class="card-body">
+    <h5 class="card-title">Movies in this List</h5>
+    <ul class="list-group mb-4">
+      <% if @bookmarks.present? %>
+        <% @bookmarks.each do |bookmark| %>
+          <li class="list-group-item bookmark-item">
+            <%= image_tag bookmark.movie.poster_url if bookmark.movie.poster_url.present? %>
+            <strong><%= bookmark.movie.title %></strong>: <%= bookmark.comment %>
+            <%= link_to 'Delete', bookmark_path(bookmark), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm ml-auto' %>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="list-group-item">No movies in this list.</li>
+      <% end %>
+    </ul>
+    <h5>Add a Movie</h5>
+    <%= render 'bookmarks/form', list: @list, bookmark: Bookmark.new %>
+  </div>
+</div>
+
+<div class="reviews">
+  <h2>Reviews</h2>
+  <% @list.reviews.each do |review| %>
+    <div class="review">
+      <div class="stars">
+        <%= "★" * review.rating %>
+      </div>
+      <p><%= review.comment %></p>
+      <small>less than a minute ago</small>
+    </div>
+  <% end %>
+</div>
+
+<h3>Add your review</h3>
+<%= simple_form_for [@list, Review.new], html: { class: 'form-horizontal' } do |f| %>
+  <%= f.input :comment, as: :text, input_html: { class: 'form-control' } %>
+  <%= f.input :rating, as: :radio_buttons, collection: [1, 2, 3, 4, 5], item_wrapper_class: 'form-check-inline', input_html: { class: 'form-check-input' } %>
+  <%= f.button :submit, 'Create Review', class: 'btn btn-primary' %>
+<% end %>

@@ -5,8 +5,7 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    @bookmarks = @list.bookmarks
-    @bookmark = Bookmark.new
+    @bookmarks = @list.bookmarks.includes(:movie) # Ensure bookmarks are loaded
   end
 
   def new
@@ -15,6 +14,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
+    @list.image_url = 'default_image.jpeg' if @list.image_url.blank?
     if @list.save
       redirect_to lists_path
     else
@@ -25,6 +25,6 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :image_url)
   end
 end
