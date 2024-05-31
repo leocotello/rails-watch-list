@@ -83,3 +83,5 @@ gem 'json'
 gem 'rails-ujs'
 
 gem "dotenv-rails"
+
+gem "cloudinary"
